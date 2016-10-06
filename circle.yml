@@ -12,5 +12,8 @@ dependencies:
 #    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
 #    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional-javascript
 deployment:
-    - (cd ./scripts; composer update --no-interaction)
-    - php -f ./scripts/wodby.php
+  production:
+    branch: /.*/
+    commands:
+      - (cd ./scripts; composer update --no-interaction)
+      - php -f ./scripts/wodby.php
