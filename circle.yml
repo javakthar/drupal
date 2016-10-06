@@ -9,10 +9,10 @@ dependencies:
     - wget https://raw.githubusercontent.com/Wodby/docker4drupal/master/docker-compose.yml
     - docker-compose up -d
 #test:
-#    - export SIMPLETEST_DB='mysql://root@localhost/dev_d8'
-#    - export SIMPLETEST_BASE_URL='http://d8.dev'
-#    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
-#    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional-javascript
+    - export SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
+    - export SIMPLETEST_BASE_URL='http://localhost:8000'
+    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
+    - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional-javascript
 deployment:
   production:
     branch: /.*/
