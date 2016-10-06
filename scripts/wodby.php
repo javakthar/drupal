@@ -20,7 +20,7 @@ $result = $api->instance()->create(
   MY_APP_ID,
   'test-' . $_SERVER['CIRCLE_BUILD_NUM'],
   Entity\Instance::TYPE_STAGE,
-  '8.2.x',
+  $_SERVER['CIRCLE_BRANCH'],
   MY_SERVER_ID,
   "CircleCI build {$_SERVER['CIRCLE_BUILD_NUM']}",
   [
