@@ -1,0 +1,12 @@
+machine:
+  php:
+    version: 5.6.26
+dependencies:
+  pre:
+    - sudo composer self-update
+    - composer install --prefer-dist
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: foo-bar-123
