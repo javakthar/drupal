@@ -6,7 +6,7 @@ define('MY_SERVER_ID', 'd4fba3f3-739e-4517-a574-ac3fba06eca1');
 // Application to deploy.
 define('MY_APP_ID', '3c156893-efd9-4a5b-b669-1a3aca7f273f');
 // Use this instance to copy db and files.
-define('MY_APP_SOURCE_INSTANCE', 'd11f6dd9-0827-40ec-9298-f1a454932f79');
+define('MY_APP_SOURCE_INSTANCE_ID', 'd11f6dd9-0827-40ec-9298-f1a454932f79');
 
 use \Wodby\Api\Entity;
 
@@ -22,10 +22,10 @@ $result = $api->instance()->create(
   Entity\Instance::TYPE_STAGE,
   '8.2.x',
   MY_SERVER_ID,
-  "CircleCI tag {$_SERVER['CIRCLE_TAG']}",
+  "CircleCI build {$_SERVER['CIRCLE_BUILD_NUM']}",
   [
-    Entity\Instance::COMPONENT_DATABASE => MY_APP_INSTANCE_PROD_ID,
-    Entity\Instance::COMPONENT_FILES => MY_APP_INSTANCE_PROD_ID,
+    Entity\Instance::COMPONENT_DATABASE => MY_APP_SOURCE_INSTANCE_ID,
+    Entity\Instance::COMPONENT_FILES => MY_APP_SOURCE_INSTANCE_ID,
   ]
 );
 
