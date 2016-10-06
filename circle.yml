@@ -19,3 +19,4 @@ deployment:
     commands:
       - (cd ./scripts; composer update --no-interaction)
       - php -f ./scripts/wodby.php
+      - echo Nice!
