@@ -2,7 +2,7 @@
 
 define('MY_ORG_ID', '9947e435-01dd-4aa7-a467-fb1567c19537');
 // Server where to deploy the new instance.
-define('MY_SERVER_ID', 'd4fba3f3-739e-4517-a574-ac3fba06eca1');
+define('MY_SERVER_ID', 'f8b23aae-079b-4fb5-916c-e095702f46ed');
 // Application to deploy.
 define('MY_APP_ID', '3c156893-efd9-4a5b-b669-1a3aca7f273f');
 // Use this instance to copy db and files.
