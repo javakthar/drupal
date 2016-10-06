@@ -3,8 +3,8 @@ machine:
     - docker
 dependencies:
   pre:
-    - git clone https://github.com/Wodby/docker4drupal.git
     - sudo pip install docker-compose
+    - wget https://raw.githubusercontent.com/Wodby/docker4drupal/master/docker-compose.yml
     - docker-compose up -d
 #test:
 #    - export SIMPLETEST_DB='mysql://root@localhost/dev_d8'
