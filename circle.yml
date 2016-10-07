@@ -17,7 +17,7 @@ deployment:
   production:
     branch: /.*/
     commands:
-      - tar --exclude=".git" --exclude=".gitignore" --exclude="./docker-runtime" -czf build.tar.gz .
+      - tar -c --exclude='.git' --exclude='.gitignore' . | gzip -9 | aws s3 cp - "s3://wodby-builds/drupal-$CIRCLE_BUILD_NUM.tar.gz"
       - (cd ./scripts; composer update --no-interaction)
-      - php -f ./scripts/wodby.php
+#      - php -f ./scripts/wodby.php
       - echo Nice!
