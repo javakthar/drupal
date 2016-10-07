@@ -17,7 +17,7 @@ deployment:
   production:
     branch: /.*/
     commands:
-      - tar --exclude=".git" --exclude=".gitignore" --exclude="./docker-runtime" -czf $CIRCLE_ARTIFACTS/build.tar.gz .
+      - tar --exclude=".git" --exclude=".gitignore" --exclude="./docker-runtime" -czf build.tar.gz .
       - (cd ./scripts; composer update --no-interaction)
       - php -f ./scripts/wodby.php
       - echo Nice!
