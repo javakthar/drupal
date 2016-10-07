@@ -4,9 +4,9 @@ define('MY_ORG_ID', '9947e435-01dd-4aa7-a467-fb1567c19537');
 // Server where to deploy the new instance.
 define('MY_SERVER_ID', 'f8b23aae-079b-4fb5-916c-e095702f46ed');
 // Application to deploy.
-define('MY_APP_ID', '3c156893-efd9-4a5b-b669-1a3aca7f273f');
+define('MY_APP_ID', 'ba42c254-264a-4295-96f4-68516a658a01');
 // Use this instance to copy db and files.
-define('MY_APP_SOURCE_INSTANCE_ID', 'd11f6dd9-0827-40ec-9298-f1a454932f79');
+define('MY_APP_SOURCE_INSTANCE_ID', 'a6573194-8043-488c-ba20-0c8fd3547f4d');
 
 use \Wodby\Api\Entity;
 
@@ -35,7 +35,7 @@ $task = $result['task'];
 /** @var Entity\Instance $instance */
 $instance = $result['instance'];
 
-echo "Waiting for instance will be created", PHP_EOL;
+echo "Deploying new instance via Wodby...", PHP_EOL;
 $api->task()->wait($task->getId(), 600);
 
 echo "Reload instance", PHP_EOL;
@@ -43,3 +43,13 @@ $instance = $api->instance()->load($instance->getId());
 
 echo "Done!", PHP_EOL;
 var_dump($instance);
+
+echo "Importing build", PHP_EOL;
+$result = $api->instance()
+  ->importCodebase($instance->getId(), $_SERVER['CIRCLE_BUILD_URL'] . '/build.tar.gz');
+
+/** @var Entity\Task $task */
+$task = $result['task'];
+$api->task()->wait($task->getId(), 600);
+
+echo "Done!", PHP_EOL;
