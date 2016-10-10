@@ -34,7 +34,7 @@ $instance = $api->instance()->load($instance->getId());
 
 // Assemble build artifacts URL.
 $s3_bucket = $_SERVER['AWS_S3_BUCKET'];
-$s3_file_name = $_SERVER['CIRCLE_PROJECT_USERNAME'] . '-' . $_SERVER['CIRCLE_BUILD_URL'] . '-' . $_SERVER['CIRCLE_SHA1'];
+$s3_file_name = $_SERVER['CIRCLE_PROJECT_REPONAME'] . '-' . $_SERVER['CIRCLE_BUILD_URL'] . '-' . $_SERVER['CIRCLE_SHA1'];
 $build_file_url = "https://s3.amazonaws.com/$s3_bucket/$s3_file_name.tar.gz";
 
 echo "Importing $build_file_url", PHP_EOL;
@@ -50,7 +50,7 @@ $api->instance()->updateProperty(
   Entity\Instance::PROPERTY_BUILD_INFO,
   [
     'builder' => 'CircleCI',
-    'project_name' => $_SERVER['CIRCLE_PROJECT_USERNAME'],
+    'project_name' => $_SERVER['CIRCLE_PROJECT_REPONAME'],
     'project_url' => $_SERVER['CIRCLE_REPOSITORY_URL'],
     'build_id' => $_SERVER['CIRCLE_BUILD_NUM'],
     'build_url' => $_SERVER['CIRCLE_BUILD_URL'],
