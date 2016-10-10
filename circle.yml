@@ -17,7 +17,7 @@ deployment:
   production:
     branch: /.*/
     commands:
-      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$CIRCLE_PROJECT_USERNAME-$CIRCLE_BUILD_URL-$CIRCLE_SHA1.tar.gz"
+      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_URL-$CIRCLE_SHA1.tar.gz"
       - (cd ./scripts; composer update --no-interaction)
 #      - php -f ./scripts/wodby.php
       - echo Nice!
