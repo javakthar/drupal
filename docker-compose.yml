@@ -99,3 +99,21 @@ services:
 #      - php
 #    ports:
 #      - "8006:22"
+
+  tests:
+    image: wodby/drupal-php:7.0
+    environment:
+      - export SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
+      - export SIMPLETEST_BASE_URL='http://localhost:8000'
+    entrypoint:
+      - cp ./sites/default/default.settings.php ./sites/default/settings.php
+      - mkdir -p ./sites/default/files
+      - > 
+        drupal --root=/var/www/html/web site:install standard --site-name="Drupal 8 via Docker" --langcode=en
+        --db-type=mysql --db-pass=drupal --db-user=drupal --db-port=3306 --db-host=mariadb --db-name=drupal
+        --site-mail=mail@example.com --account-pass=admin
+      - chown -R www-data:www-data .
+      - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
+      - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional-javascript
+    volumes:
+      - ./:/var/www/html
