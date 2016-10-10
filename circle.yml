@@ -13,11 +13,11 @@ test:
     - docker-compose exec php sh
     - cp ./sites/default/default.settings.php ./sites/default/settings.php
     - mkdir -p ./sites/default/files
-    - drupal --root=/var/www/html/web site:install standard |
---site-name="Drupal 8 via Docker" --langcode=en  |
---db-type=mysql --db-pass=drupal --db-user=drupal --db-port=3306 |
---db-host=mariadb --db-name=drupal |
---site-mail=mail@example.com |
+    - | drupal --root=/var/www/html/web site:install standard 
+--site-name="Drupal 8 via Docker" --langcode=en
+--db-type=mysql --db-pass=drupal --db-user=drupal --db-port=3306
+--db-host=mariadb --db-name=drupal
+--site-mail=mail@example.com
 --account-pass=admin
     - chown -R www-data:www-data .
     - export SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
