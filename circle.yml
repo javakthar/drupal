@@ -9,6 +9,7 @@ dependencies:
     - docker-compose up -d
     - composer update --no-interaction
 test:
+  override:
     - export SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
     - export SIMPLETEST_BASE_URL='http://localhost:8000'
     - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
