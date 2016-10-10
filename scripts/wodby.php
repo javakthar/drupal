@@ -52,7 +52,7 @@ $api->instance()->updateProperty(
     'builder' => 'CircleCI',
     'project_name' => $_SERVER['CIRCLE_PROJECT_REPONAME'],
     'project_url' => $_SERVER['CIRCLE_REPOSITORY_URL'],
-    'build_id' => $_SERVER['CIRCLE_BUILD_NUM'],
+    'build_number' => $_SERVER['CIRCLE_BUILD_NUM'],
     'build_url' => $_SERVER['CIRCLE_BUILD_URL'],
     'build_download_url' => $build_file_url,
     'git_branch' => $_SERVER['CIRCLE_BRANCH'],
