@@ -39,21 +39,21 @@ services:
     ports:
       - "8000:80"
 
-  pma:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mariadb
-      PMA_USER: drupal
-      PMA_PASSWORD: drupal
-      PHP_UPLOAD_MAX_FILESIZE: 1G
-      PHP_MAX_INPUT_VARS: 1G
-    ports:
-     - "8001:80"
+#  pma:
+#    image: phpmyadmin/phpmyadmin
+#    environment:
+#      PMA_HOST: mariadb
+#      PMA_USER: drupal
+#      PMA_PASSWORD: drupal
+#      PHP_UPLOAD_MAX_FILESIZE: 1G
+#      PHP_MAX_INPUT_VARS: 1G
+#    ports:
+#     - "8001:80"
 
-  mailhog:
-    image: mailhog/mailhog
-    ports:
-      - "8002:8025"
+#  mailhog:
+#    image: mailhog/mailhog
+#    ports:
+#      - "8002:8025"
 
 #  redis:
 #    image: redis:3.2-alpine
