@@ -13,11 +13,11 @@ test:
     - export SIMPLETEST_BASE_URL='http://localhost:8000'
     - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional
     - sudo -u www-data -E ./vendor/bin/phpunit -c core --testsuite functional-javascript
-#deployment:
-#  production:
-#    branch: /.*/
-#    commands:
-#      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
-#      - (cd ./scripts; composer update --no-interaction)
-#      - php -f ./scripts/wodby.php
+deployment:
+  production:
+    branch: /.*/
+    commands:
+      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
+      - (cd ./scripts; composer update --no-interaction)
+      - php -f ./scripts/wodby.php
 
