@@ -9,6 +9,11 @@ machine:
     localhost: 127.0.0.1
 dependencies:
   override:
+    - echo $PATH
+    - echo $HOME
+    - echo $CIRCLE_PROJECT_REPONAME
+    - pwd
+    - asdfadsf
     - sudo pip install docker-compose
     - docker-compose up -d
 test:
