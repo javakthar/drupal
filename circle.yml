@@ -1,8 +1,6 @@
 machine:
   php:
     version: 7.0.4
-  mysql:
-    version: 5.7.15
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
@@ -11,7 +9,7 @@ dependencies:
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
     - composer update --no-interaction
 database:
-  override:
+  post:
     - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
 test:
   override:
