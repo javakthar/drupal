@@ -1,6 +1,5 @@
 #!/bin/sh
 
-su www-data
 composer global require "hirak/prestissimo:^0.3"
 composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction
 composer update --no-interaction

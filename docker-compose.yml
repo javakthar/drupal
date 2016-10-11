@@ -19,7 +19,7 @@ services:
       PHP_SITE_NAME: dev
       PHP_HOST_NAME: localhost:8000
 #      PHP_DOCROOT: public # Relative path inside the /var/www/html/ directory.
-      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
+#      PHP_SENDMAIL_PATH: /usr/sbin/sendmail -t -i -S mailhog:1025
       # PHP_XDEBUG_ENABLED: 1
       # PHP_XDEBUG_AUTOSTART: 1
       # PHP_XDEBUG_REMOTE_CONNECT_BACK: 0         # This is needed to respect remote.host setting bellow
@@ -38,12 +38,3 @@ services:
       - php
     ports:
       - "8000:80"
-
-  tests:
-    image: wodby/drupal-php:7.0
-    environment:
-      - export SIMPLETEST_DB='mysql://drupal:drupal@mariadb/drupal'
-      - export SIMPLETEST_BASE_URL='http://localhost:8000'
-    volumes_from:
-      - php
-    entrypoint: ./scripts/tests.sh
