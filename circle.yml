@@ -1,6 +1,8 @@
 machine:
   php:
     version: 7.0.4
+  hosts:
+    localhost: 127.0.0.1    
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
@@ -14,7 +16,7 @@ database:
 test:
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
-    - php ./core/scripts/run-tests.sh --url http://127.0.0.1/ --dburl mysql://ubuntu@localhost:3306/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
+    - php ./core/scripts/run-tests.sh --url http://localhost/ --dburl mysql://ubuntu@localhost:3306/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
 deployment:
   production:
     branch: /.*/
