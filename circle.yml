@@ -10,13 +10,12 @@ dependencies:
     - composer global require drush/drush:8.*
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
     - composer update --no-interaction
-database:
-  post:
-    - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
 test:
+  pre:
+    - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
-    - php ./core/scripts/run-tests.sh --url http://localhost/ --dburl mysql://ubuntu@localhost:3306/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
+    - php ./core/scripts/run-tests.sh --url http://localhost/ --dburl mysql://ubuntu@localhost/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
 deployment:
   production:
     branch: /.*/
