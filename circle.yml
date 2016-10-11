@@ -9,8 +9,8 @@ dependencies:
     - docker-compose up -d
 test:
   override:
-    - docker-compose run php chown -R 82:82 .
-    - docker-compose run php -u www-data sh ./scripts/tests.sh
+#    - docker-compose run php chown -R 82:82 .
+    - docker-compose run --user 82 php sh ./scripts/tests.sh
 deployment:
   production:
     branch: /.*/
