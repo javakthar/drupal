@@ -4,21 +4,21 @@ machine:
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+    - composer global require "hirak/prestissimo:^0.3"
+    - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
+    - composer update --no-interaction
     - php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush
     - php drush core-status
     - chmod +x drush
     - sudo mv drush /usr/local/bin
-    - drush init
-    - composer global require "hirak/prestissimo:^0.3"
-    - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
-    - cd ~ && composer update --no-interaction
+    - drush init    
 database:
   override:
     - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost:3306/circle_test
 test:
   override:
-    - ls -la
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
+    - php ./core/scripts/run-tests.sh --url http://localhost:8000/ 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
 deployment:
   production:
     branch: /.*/
