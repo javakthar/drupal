@@ -8,16 +8,15 @@ dependencies:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
     - curl https://drupalconsole.com/installer -L -o drupal.phar
     - php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar
-    - mv drupal.phar /usr/local/bin/drupal
-    - chmod +x /usr/local/bin/drupal
+    - mv drupal.phar drupal
+    - chmod +x drupal
     - drupal init --override
     - composer global require "hirak/prestissimo:^0.3"
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
     - composer update --no-interaction
 test:
   pre:
-    - mysql -uubuntu -e "SHOW DATABASES;"
-    - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
+    - drupal site:install standard --db-type="mysql" --db-name="circle_test" --db-user="ubuntu" --no-interaction
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
     - php ./core/scripts/run-tests.sh --url http://localhost/ --dburl mysql://ubuntu@localhost/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
