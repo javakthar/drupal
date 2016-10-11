@@ -12,6 +12,7 @@ dependencies:
     - composer update --no-interaction
 test:
   pre:
+    - mysql -uubuntu -e "SHOW DATABASES;"
     - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
