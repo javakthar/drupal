@@ -9,7 +9,6 @@ dependencies:
     - docker-compose up -d mariadb
     - docker-compose up -d php
     - docker-compose up -d nginx
-    - composer update --no-interaction
 test:
   override:
     - docker-compose up tests
