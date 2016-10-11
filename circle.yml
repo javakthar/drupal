@@ -1,6 +1,8 @@
 machine:
   php:
     version: 7.0.4
+  mysql:
+    version: 5.7.15
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
@@ -10,7 +12,7 @@ dependencies:
     - composer update --no-interaction
 database:
   override:
-    - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost:3306/circle_test
+    - drush si standard --y --account-name=admin --account-pass=admin --db-url=mysql://ubuntu@localhost/circle_test
 test:
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
