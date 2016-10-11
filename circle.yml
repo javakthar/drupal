@@ -1,6 +1,9 @@
 machine:
   php:
     version: 7.0.4
+dependencies:
+  pre:
+    - composer update
 test:
   override:
     - cd core
