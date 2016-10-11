@@ -7,5 +7,5 @@ composer update --no-interaction
 cd core
 phpunit core/tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
 phpunit core/tests/Drupal/KernelTests/Component/Utility/SafeMarkupKernelTest.php
-../vendor/bin/phpunit core/tests/Drupal/FunctionalTests/Breadcrumb/Breadcrumb404Test.php
-../vendor/bin/phpunit core/tests/Drupal/FunctionalJavascriptTests/Core/Session/SessionTest.php
+phpunit core/tests/Drupal/FunctionalTests/Breadcrumb/Breadcrumb404Test.php
+phpunit core/tests/Drupal/FunctionalJavascriptTests/Core/Session/SessionTest.php
