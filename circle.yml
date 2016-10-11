@@ -6,8 +6,12 @@ machine:
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+    - curl https://drupalconsole.com/installer -L -o drupal.phar
+    - php -r "readfile('https://drupalconsole.com/installer');" > drupal.phar
+    - mv drupal.phar /usr/local/bin/drupal
+    - chmod +x /usr/local/bin/drupal
+    - drupal init --override
     - composer global require "hirak/prestissimo:^0.3"
-    - composer global require drush/drush:8.*
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
     - composer update --no-interaction
 test:
