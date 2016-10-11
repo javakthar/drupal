@@ -1,22 +1,14 @@
 machine:
-  pre:
-    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
-  services:
-    - docker
-dependencies:
-  pre:
-    - sudo pip install docker-compose
-    - docker-compose up -d mariadb
-    - docker-compose up -d php
-    - docker-compose up -d nginx
-    - composer update --no-interaction
+  php:
+    version: 7.0.4
 test:
   override:
-    - docker-compose up tests
+    - cd core
+    - ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
 deployment:
   production:
     branch: /.*/
     commands:
-      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
+      - tar -c --exclude='.git' --exclude='.gitignore' . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
       - (cd ./scripts; composer update --no-interaction)
       - php -f ./scripts/wodby.php
