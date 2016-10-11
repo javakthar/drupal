@@ -10,7 +10,7 @@ services:
       MYSQL_PASSWORD: drupal
 
   php:
-    image: wodby/drupal-php:7.0 # Allowed: 7.0, 5.6.
+    image: wodby/drupal-php:7.0
     environment:
       PHP_SITE_NAME: dev
       PHP_HOST_NAME: localhost:8000
@@ -25,5 +25,3 @@ services:
       DRUPAL_VERSION: 8
     volumes_from:
       - php
-    ports:
-      - "8000:80"
