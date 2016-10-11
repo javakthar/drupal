@@ -6,12 +6,11 @@ machine:
 dependencies:
   override:
     - sudo pip install docker-compose
-    - docker-compose up -d mariadb
-    - docker-compose up -d php
-    - docker-compose up -d nginx
+    - docker-compose up -d
 test:
   override:
-    - docker-compose up tests
+    - docker-compose run php chown -R 82:82 .
+    - docker-compose run php -u www-data sh ./scripts/tests.sh
 deployment:
   production:
     branch: /.*/
