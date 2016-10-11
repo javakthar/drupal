@@ -8,8 +8,8 @@ dependencies:
     - composer update --no-interaction
 test:
   override:
-    - cd core
-    - ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
+    - ls -la
+    - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
 deployment:
   production:
     branch: /.*/
