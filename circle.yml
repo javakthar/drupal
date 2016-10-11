@@ -6,7 +6,7 @@ machine:
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
-    - composer require global drupal/console:@stable
+    - composer global require drupal/console:@stable
     - drupal init --override
     - composer global require "hirak/prestissimo:^0.3"
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
@@ -21,6 +21,6 @@ deployment:
   production:
     branch: /.*/
     commands:
-      - tar -c --exclude='.git' --exclude='.gitignore' --exclude='.composer' --exclude='drupal' . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
+      - tar -c --exclude='.git' --exclude='.gitignore' --exclude='.composer' . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
       - (cd ./scripts; composer update --no-interaction)
       - php -f ./scripts/wodby.php
