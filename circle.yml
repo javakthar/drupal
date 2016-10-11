@@ -2,7 +2,7 @@ machine:
   php:
     version: 7.0.4
   hosts:
-    localhost: 127.0.0.1    
+    localhost: 127.0.0.1
 dependencies:
   pre:
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
@@ -16,7 +16,7 @@ dependencies:
     - composer update --no-interaction
 test:
   pre:
-    - drupal site:install standard --db-type="mysql" --db-name="circle_test" --db-user="ubuntu" --no-interaction
+    - ./drupal site:install standard --db-type="mysql" --db-name="circle_test" --db-user="ubuntu" --no-interaction
   override:
     - cd core && ../vendor/bin/phpunit tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
     - php ./core/scripts/run-tests.sh --url http://localhost/ --dburl mysql://ubuntu@localhost/circle_test 'Drupal\Tests\Component\Utility\ArgumentsResolverTest'
@@ -24,6 +24,6 @@ deployment:
   production:
     branch: /.*/
     commands:
-      - tar -c --exclude='.git' --exclude='.gitignore' --exclude='.composer' . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
+      - tar -c --exclude='.git' --exclude='.gitignore' --exclude='.composer' --exclude='drupal' . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
       - (cd ./scripts; composer update --no-interaction)
       - php -f ./scripts/wodby.php
