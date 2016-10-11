@@ -3,17 +3,8 @@ machine:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   services:
     - docker
-  environment:
-    PATH: $HOME/$CIRCLE_PROJECT_REPONAME/vendor/bin:$PATH
-  hosts:
-    localhost: 127.0.0.1
 dependencies:
   override:
-    - echo $PATH
-    - echo $HOME
-    - echo $CIRCLE_PROJECT_REPONAME
-    - pwd
-    - asdfadsf
     - sudo pip install docker-compose
     - docker-compose up -d
 test:
