@@ -3,12 +3,12 @@ machine:
     version: 7.0.4
 dependencies:
   pre:
-    - mkdir /opt/circleci/drush-8.x
-    - cd /opt/circleci/drush-8.x
-    - composer init --require=drush/drush:8.* -n
-    - composer config bin-dir /usr/local/bin
-    - composer install
     - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+    - php -r "readfile('https://s3.amazonaws.com/files.drush.org/drush.phar');" > drush
+    - php drush core-status
+    - chmod +x drush
+    - sudo mv drush /usr/local/bin
+    - drush init
     - composer global require "hirak/prestissimo:^0.3"
     - composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction    
     - cd ~ && composer update --no-interaction
