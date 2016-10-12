@@ -21,7 +21,6 @@ test:
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/KernelTests/Component/Utility/SafeMarkupKernelTest.php
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/FunctionalTests/Breadcrumb/Breadcrumb404Test.php
-    - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/FunctionalJavascriptTests/Core/Session/SessionTest.php
 deployment:
   production:
     branch: /.*/
