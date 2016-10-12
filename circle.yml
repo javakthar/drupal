@@ -6,8 +6,8 @@ machine:
 dependencies:
   override:
     - sudo pip install docker-compose
-    - docker-compose up mariadb -d
-    - docker-compose up nginx -d
+    - docker-compose up -d mariadb
+    - docker-compose up -d nginx
 test:
   pre:
 #    - docker-compose run php mkdir vendor
