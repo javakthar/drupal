@@ -8,14 +8,25 @@ dependencies:
     - sudo pip install docker-compose
     - docker-compose up -d
 test:
+  pre:
+#    - docker-compose run php mkdir vendor
+#    - docker-compose run php touch composer.lock
+#    - docker-compose run php chown -R 82:82 vendor
+#    - docker-compose run php chown 82:82 composer.json
+#    - docker-compose run php chown 82:82 composer.lock
+#    - docker-compose run php chown -R 82:82 sites
+    - ls -la
+    - docker-compose run ls -la
+    - docker-compose run composer global require "hirak/prestissimo:^0.3"
+    - asdf
+    - docker-compose run composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction
+    - docker-compose run composer update --no-interaction
   override:
-    - docker-compose run php mkdir vendor
-    - docker-compose run php touch composer.lock
-    - docker-compose run php chown -R 82:82 vendor
-    - docker-compose run php chown 82:82 composer.json
-    - docker-compose run php chown 82:82 composer.lock
-    - docker-compose run php chown -R 82:82 sites
-    - docker-compose run --user 82 php sh scripts/tests.sh
+    - vendor/bin/phpunit -c core core/tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
+    - vendor/bin/phpunit -c core core/tests/Drupal/Tests/Component/Utility/HtmlTest.php
+    - vendor/bin/phpunit -c core core/tests/Drupal/KernelTests/Component/Utility/SafeMarkupKernelTest.php
+    - vendor/bin/phpunit -c core core/tests/Drupal/FunctionalTests/Breadcrumb/Breadcrumb404Test.php
+    - vendor/bin/phpunit -c core core/tests/Drupal/FunctionalJavascriptTests/Core/Session/SessionTest.php
 deployment:
   production:
     branch: /.*/
