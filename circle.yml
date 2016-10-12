@@ -21,9 +21,9 @@ test:
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/KernelTests/Component/Utility/SafeMarkupKernelTest.php
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/FunctionalTests/Breadcrumb/Breadcrumb404Test.php
-deployment:
-  production:
-    branch: /.*/
-    commands:
-      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
-      - php -f ./scripts/wodby.php
+#deployment:
+#  production:
+#    branch: /.*/
+#    commands:
+#      - tar -c --exclude='.git' --exclude='.gitignore' --exclude="./docker-runtime" . | gzip -9 | aws s3 cp - "s3://$AWS_S3_BUCKET/$AWS_S3_FILE_NAME-$CIRCLE_BUILD_NUM.tar.gz"
+#      - php -f ./scripts/wodby.php
