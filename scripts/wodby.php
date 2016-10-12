@@ -11,7 +11,7 @@ echo "Creating instance.", PHP_EOL;
 $result = $api->instance()->create(
   $_SERVER['WODBY_APP_ID'],
   'test-' . $_SERVER['CIRCLE_BUILD_NUM'],
-  Entity\Instance::TYPE_STAGE,
+  Entity\Instance::TYPE_DEV,
   $_SERVER['WODBY_SERVER_ID'],
   [
     Entity\Instance::COMPONENT_DATABASE => $_SERVER['WODBY_SOURCE_INSTANCE_ID'],
