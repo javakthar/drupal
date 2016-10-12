@@ -10,13 +10,11 @@ dependencies:
     - docker-compose up -d nginx
 test:
   pre:
-    - id www-data
     - sudo chown -R 82:82 .
-#    - docker-compose run chown -R 82:82 .
     - docker-compose run --user 82 php composer global require "hirak/prestissimo:^0.3"
     - docker-compose run --user 82 php composer require "wikimedia/composer-merge-plugin:~1.3" --no-interaction
     - docker-compose run --user 82 php composer update -n
-    - composer update -n -d ./scripts
+    - docker-compose run --user 82 php composer update -n -d ./scripts
   override:
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/Tests/Core/Password/PasswordHashingTest.php
     - docker-compose run --user 82 php vendor/bin/phpunit -c core core/tests/Drupal/KernelTests/Component/Utility/SafeMarkupKernelTest.php
