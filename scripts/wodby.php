@@ -29,10 +29,6 @@ $instance = $result['instance'];
 echo "Deploying new instance via Wodby...", PHP_EOL;
 $api->task()->wait($task->getId(), 600);
 
-echo "Reload instance variable", PHP_EOL;
-$instance = $api->instance()->load($instance->getId());
-
-// Assemble build artifacts URL.
 $s3_bucket = $_SERVER['AWS_S3_BUCKET'];
 $s3_file_name = $_SERVER['AWS_S3_FILE_NAME'] . '-' . $_SERVER['CIRCLE_BUILD_NUM'];
 $build_file_url = "https://s3.amazonaws.com/$s3_bucket/$s3_file_name.tar.gz";
